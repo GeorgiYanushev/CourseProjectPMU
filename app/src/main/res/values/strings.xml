@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CourseProject</string>
+    <string name="go_to_debts">Кликни да отидеш при дългове</string>
+    <string name="msavings_goal">Цел: %s</string>
+    <string name="msavings_current">Събрани пари: %s</string>
+    <string name="msavings_descriptions">Повод: %s</string>
+    <string name="mbalance">Баланс: %sлв</string>
+    <string name="mdescription">Описание: %s</string>
+    <string name="mamount">Сума: %sлв</string>
+    <string name="mdirection">Приход/Разход: %s</string>
+    <string name="mdate">Дата: %s</string>
+    <string name="mlocation">Локация: %s</string>
+    <string name="homeScreen">Начална страница</string>
+    <string name="mdebts_description">Дължиш на: %s</string>
+    <string name="mdebts_status">Платен: %s</string>
+    <string name="mdebts_date">Взет на: %s</string>
+    <string name="mperiodicity">Периодичност: %s</string>
+    <string name="mscheduling_date">Взет на: %s</string>
+    <string name="unpaid_debt">"Имате неплатен дълг"</string>
+</resources>
