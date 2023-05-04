@@ -16,7 +16,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.courseproject.R;
 import com.example.courseproject.databinding.TransactionsScreenBinding;
 import com.example.courseproject.Database.Database;
 import com.example.courseproject.Database.Transaction;
@@ -81,6 +79,7 @@ public class TransactionActivity extends Activity implements LocationListener {
                         dummy.setDate(dtf.format(now));
                         dummy.setLocation("N/A");
                         database.addTransaction(dummy);
+                        Toast.makeText(TransactionActivity.this,"Транцакцията беше изпълнена",Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -102,6 +101,7 @@ public class TransactionActivity extends Activity implements LocationListener {
                             dummy.setDate(dtf.format(now));
                             dummy.setLocation(address);
                             database.addTransaction(dummy);
+                            Toast.makeText(TransactionActivity.this,"Транцакцията беше изпълнена",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -129,13 +129,13 @@ public class TransactionActivity extends Activity implements LocationListener {
     }
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        //Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
         try {
             Geocoder geocoder = new Geocoder(TransactionActivity.this, Locale.getDefault());
             addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
             address = addresses.get(0).getAddressLine(0);
         }catch (Exception e){
             e.printStackTrace();
+            Toast.makeText(TransactionActivity.this,"Грешка при взимане на локация",Toast.LENGTH_SHORT).show();
         }
     }
     @SuppressLint("MissingPermission")
@@ -146,6 +146,7 @@ public class TransactionActivity extends Activity implements LocationListener {
 
         }catch (Exception e){
             e.printStackTrace();
+            Toast.makeText(TransactionActivity.this,"Грешка при взимане на локация",Toast.LENGTH_SHORT).show();
         }
     }
 

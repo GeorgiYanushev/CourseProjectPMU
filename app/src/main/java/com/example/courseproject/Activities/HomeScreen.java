@@ -29,6 +29,7 @@ public class HomeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstancesState)
     {
+       // database.onDeleteTable();
         LocalDate now=LocalDate.now();
         binding= HomeScreenBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstancesState);
@@ -68,7 +69,7 @@ public class HomeScreen extends Activity {
                 database.updateScheduling(priv.getAmount(), priv.getDescription(), priv.getId(), now.plusMonths(1).toString(), "W");
             }
         }
-       //database.onDeleteTable();
+
         binding.balance.setText(getString(R.string.mbalance,database.getLastTotal().toString()));
         binding.transactions.setOnClickListener(
                 new View.OnClickListener(){

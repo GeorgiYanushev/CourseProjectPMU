@@ -270,7 +270,7 @@ public class Database extends SQLiteOpenHelper {
         return res;
     }
     public ArrayList<Transaction> getThisWeekTransactions(){
-        String countQuery = "SELECT * FROM " + TABLE_Transaction + " WHERE date >= DATE('now','-7 day');";
+        String countQuery = "SELECT * FROM " + TABLE_Transaction + " WHERE date >= DATE('now','-7 day') and description<>'A1B2C3D4!@#';";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery(countQuery, null);
         ArrayList<Transaction> res = new ArrayList<>();
@@ -364,7 +364,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<Transaction> getHistoryTransactions(){
-        String countQuery = "SELECT * FROM " + TABLE_LOG_Transaction + ";";
+        String countQuery = "SELECT * FROM " + TABLE_LOG_Transaction + "  WHERE description<>'A1B2C3D4!@#';";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery(countQuery, null);
         ArrayList<Transaction> res = new ArrayList<>();

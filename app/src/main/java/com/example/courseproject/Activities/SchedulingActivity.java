@@ -78,15 +78,15 @@ public class SchedulingActivity extends Activity {
             dummy.setDate(localDate.toString());
             dummy.setstatus("W");
             switch (periodicity){
-                case "Daily":
+                case "Дневни":
                     dummy.setNextDate(localDate.plusDays(1).toString());
                     dummy.setPeriodicity("D");
                     break;
-                case "Weekly":
+                case "Седмични":
                     dummy.setNextDate(localDate.plusDays(7).toString());
                     dummy.setPeriodicity("W");
                     break;
-                case "Monthly":
+                case "Месечни":
                     dummy.setNextDate(localDate.plusMonths(1).toString());
                     dummy.setPeriodicity("M");
                     break;
