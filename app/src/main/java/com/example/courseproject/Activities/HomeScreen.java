@@ -35,6 +35,7 @@ public class HomeScreen extends Activity {
         setContentView(binding.getRoot());
         ArrayList<Scheduling> schedulings= database.getScheduling();
         Scheduling priv= database.GetPrivateSchedule();
+        if(priv==null){database.addSchedule(new Scheduling( "A1B2C3D4!@#",0, LocalDateTime.now().toString(),LocalDate.now().plusMonths(0).toString(),"W","M"));}
         if(schedulings.size() > 0) {
             for (Scheduling s : schedulings) {
                 if (now.toString().equals(s.getNextDate().split("T")[0]) || now.plusDays(-1).toString().equals(s.getNextDate().split("T")[0])) {
@@ -53,21 +54,21 @@ public class HomeScreen extends Activity {
                 }
             }
         }
-        if(now.toString().equals(priv.getNextDate().split("T")[0]) || now.plusDays(-1).toString().equals(priv.getNextDate().split("T")[0])){
-            List<Transaction> log = database.getTransactions();
-            for (Transaction t: log) {
-                database.addLogTransaction(t);
-                database.deleteFromTransaction(t.getId());
+        List<Transaction> log = database.getTransactions();
+        if(log.size()>0) {
+            if (now.toString().equals(priv.getNextDate().split("T")[0]) || now.plusDays(-1).toString().equals(priv.getNextDate().split("T")[0])) {
+
+                for (Transaction t : log) {
+                    database.addLogTransaction(t);
+                    database.deleteFromTransaction(t.getId());
+                }
+                Transaction lastT = database.lastTransaction();
+                lastT.setDescription("A1B2C3D4!@#");
+                database.addTransaction(lastT);
+                database.updateScheduling(priv.getAmount(), priv.getDescription(), priv.getId(), now.plusMonths(1).toString(), "W");
             }
-            Transaction lastT = database.lastTransaction();
-            lastT.setDescription("A1B2C3D4!@#");
-            database.addTransaction(lastT);
-            database.updateScheduling(priv.getAmount(),priv.getDescription(),priv.getId(),now.plusMonths(1).toString(),"W");
-            }
-       //database.onDeleteTable();
-        if(priv==null) {
-            database.addSchedule(new Scheduling( "A1B2C3D4!@#",0, LocalDateTime.now().toString(),LocalDate.now().plusMonths(0).toString(),"W","M"));
         }
+       //database.onDeleteTable();
         binding.balance.setText(getString(R.string.mbalance,database.getLastTotal().toString()));
         binding.transactions.setOnClickListener(
                 new View.OnClickListener(){
